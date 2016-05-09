@@ -15,9 +15,18 @@
 			<script src="white.js"></script>
 			<script src="green.js"></script>
 			<script src="app9.js"></script>
-		
+			<script src="DonutChartDirective.js"></script>
+			
+	<div class="row">
+			<div style="position:fixed;top:2%;left:2%;width:40%;">
+			
+				<label>Power / Toughness / CMC graphs</label>
+				<arc-graph-1 data='byPower'></arc-graph-1> 
+				<arc-graph-1 data='byToughness'></arc-graph-1> 
+				<arc-graph-1 data='byCMC'></arc-graph-1> 
+			</div>
 
-		<div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4 col-sm-offset-4">
+		<div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-5 col-sm-offset-5">
 	
 		<form ng-sumbit="getCards()">
 			
@@ -35,18 +44,8 @@
 				<option ng-repeat="type in types" value="{{type}}">{{type}}</option>
 			</select>   																-->
 			
-			<div class="dropdown">
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
-			  ng-model="set" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				Dropdown
-				<span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li ng-repeat="s in sets" value="{{s.id}}">{{s.name}}</li>
-			  </ul>
-			</div>
-				
-				<br>
+			
+				<br><br>
 				
 			Sets: <select ng-model="set">
 				<option ng-repeat="s in sets" value="{{s.id}}">{{s.name}}</option>
@@ -68,7 +67,6 @@
 		<label>Has Power: <input ng-model="search.power"></label><br> 
 		<label>Has toughness: <input ng-model="search.toughness"></label><br> 
 		<label>Has in cmc: <input ng-model="search.cmc"></label><br> 
-		{{byToughness}}{{byPower}}{{byCMC}}
 		
 				<div ng-repeat="card in jsonCards | filter:search:strict ">
 					<ul>
@@ -89,7 +87,6 @@
 					
 				</div>
 			</div>
-
 		
 	  </body>
 	</html>

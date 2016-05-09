@@ -62,10 +62,10 @@ app.controller('myCtrl', function($scope, $http){
 		for(i=0; i<d.length; i++){
 			//if(card.cmc == $scope.search.cmc){
 			
-			if(d[i].power != null)
+			if(d[i].power != null && d[i].power != '*')
 				$scope.byPower.push(d[i].power);
 				
-			if(d[i].toughness != null)
+			if(d[i].power != null && d[i].power != '*')
 				$scope.byToughness.push(d[i].toughness);
 				
 				$scope.byCMC.push(d[i].cmc);
