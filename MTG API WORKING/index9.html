@@ -20,9 +20,9 @@
 		<div class="col-md-5 col-sm-5 col-xs-12 col-md-offset-4 col-sm-offset-4">
 	
 		<form ng-sumbit="getCards()">
-			<br>
-			Subtypes: <select class="selectpicker" data-style="btn-primary  ng-model="type">
-				<option ng-repeat="subtype in subtypes" value="{{subtype}}">{{subtype}}</option>
+			
+		<!--	Subtypes: <select class="selectpicker" data-style="btn-primary"  ng-model="subtype">
+				<option ng-repeat="sub in subtypes" value="{{sub}}">{{sub}}</option>
 			</select>
 			
 			<br><br>
@@ -33,16 +33,28 @@
 			<br><br>
 			Types: <select class="selectpicker" ng-model="">
 				<option ng-repeat="type in types" value="{{type}}">{{type}}</option>
-			</select> 
+			</select>   																-->
 			
-				<br><br>
-			Sets: <select class="selectpicker" ng-model="set">
-				<option ng-repeat="set in sets" value="{{set.id}}">{{set.name}}</option>
+			<div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
+			  ng-model="set" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				Dropdown
+				<span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li ng-repeat="s in sets" value="{{s.id}}">{{s.name}}</li>
+			  </ul>
+			</div>
+				
+				<br>
+				
+			Sets: <select ng-model="set">
+				<option ng-repeat="s in sets" value="{{s.id}}">{{s.name}}</option>
 			</select> 
 			
 			<br><br>
-			Colors: <select class="selectpicker" ng-model="">
-				<option ng-repeat="color in colors" value="{{color}}">{{color}}</option>
+			Colors: <select ng-model="color">
+				<option ng-repeat="c in colors" value="{{c}}">{{c}}</option>
 			</select> 
 			
 			</br></br>
@@ -52,7 +64,13 @@
 		</form>
 		
 		
-				<div ng-repeat="card in jsonCards">
+		<label>Has in name: <input ng-model="search.name"></label><br> 
+		<label>Has Power: <input ng-model="search.power"></label><br> 
+		<label>Has toughness: <input ng-model="search.toughness"></label><br> 
+		<label>Has in cmc: <input ng-model="search.cmc"></label><br> 
+		{{byToughness}}{{byPower}}{{byCMC}}
+		
+				<div ng-repeat="card in jsonCards | filter:search:strict ">
 					<ul>
 					<li>
 						Name: {{card.name}} Power: {{card.power}} Toughness: {{card.toughness}}

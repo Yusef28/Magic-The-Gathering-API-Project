@@ -12,6 +12,7 @@ app.controller('myCtrl', function($scope, $http){
 	$scope.set = 'ons';
 	$scope.type = 'zombie';
 	$scope.color = 'black';
+	$scope.subtype = 'angel';
 	
 	//Filling menu options
 	$scope.types = [];
@@ -21,16 +22,67 @@ app.controller('myCtrl', function($scope, $http){
 	$scope.rarities = [];
 	$scope.colors = [];
 
+	$scope.search = '';
+	
+	$scope.byPower = [];
+	$scope.byToughness = [];
+	$scope.byCMC = [];
+	
+	$scope.filterPower = function(d){
+		$scope.byPower = [];
+		for(i=0; i<d.length; i++){
+			//if(card.power == $scope.search.power){
+				$scope.byPower.push(d[i].power);
+				//}
+			}
+		}
+		
+	$scope.filterToughness = function(d){	
+		$scope.byToughness = [];
+		for(i=0; i<d.length; i++){
+			//if(card.toughness == $scope.search.toughness){
+				$scope.byToughness.push(d[i].toughness);
+				//}
+			}
+		}
+		
+	$scope.filterCMC = function(d){
+		$scope.byCMC = [];	
+		for(i=0; i<d.length; i++){
+			//if(card.cmc == $scope.search.cmc){
+				$scope.byCMC.push(d[i].cmc);
+				//}
+			}
+		}
+		
+	$scope.PTC = function(d){
+		$scope.byPower = [];
+		$scope.byToughness = [];
+		$scope.byCMC = [];	
+		for(i=0; i<d.length; i++){
+			//if(card.cmc == $scope.search.cmc){
+			
+			if(d[i].power != null)
+				$scope.byPower.push(d[i].power);
+				
+			if(d[i].toughness != null)
+				$scope.byToughness.push(d[i].toughness);
+				
+				$scope.byCMC.push(d[i].cmc);
+				//}
+			}
+		}
 
 	
-	$scope.hello = function() { alert('hello'); 
+	
+	$scope.hello = function() {
 			$http({
 		  method: 'GET',
-		  url: 'https://api.deckbrew.com/mtg/cards?set=' + $scope.set + '&subtype=' + $scope.type
+		  url: 'https://api.deckbrew.com/mtg/cards?set=' + $scope.set + '&color=' + $scope.color //'&subtype=' + $scope.subtype
 		}).success(function(data) {
 			
 			$scope.jsonCards = data;
-			
+			$scope.PTC(data);
 			console.log($scope.jsonCards);
 		  }).
 		   error(function (data, status) {
@@ -121,6 +173,8 @@ app.controller('myCtrl', function($scope, $http){
 			  }
 			});		
 			};
+			
+	
 			
 
 	$scope.getTypes();
